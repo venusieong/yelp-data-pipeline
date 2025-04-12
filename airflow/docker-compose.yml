@@ -27,6 +27,7 @@ services:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
+      - ../terraform:/opt/airflow/terraform  
     ports:
       - "8080:8080"
     command: webserver
@@ -44,6 +45,7 @@ services:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs
       - ./plugins:/opt/airflow/plugins
+      - ../terraform:/opt/airflow/terraform  
     command: scheduler
 
 volumes:
