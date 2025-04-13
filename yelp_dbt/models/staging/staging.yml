@@ -1,0 +1,206 @@
+version: 2
+
+sources:
+  - name: yelp_dataset
+    database: yelpdatapipeline
+    schema: yelp_dataset
+    tables:
+      - name: business
+      - name: user
+      - name: review
+      - name: tip
+      - name: checkin 
+
+models:
+  - name: stg_business
+    description: "Staging model for Yelp business data with selected flattened fields"
+    columns:
+      - name: business_id
+        description: "Unique identifier for the business"
+        tests:
+          - not_null
+          - unique
+
+      - name: name
+        description: "Name of the business"
+
+      - name: address
+        description: "Street address of the business"
+
+      - name: city
+        description: "City where the business is located"
+
+      - name: state
+        description: "State where the business is located"
+
+      - name: postal_code
+        description: "Postal code of the business"
+
+      - name: stars
+        description: "Average rating of the business from 1.0 to 5.0"
+
+      - name: review_count
+        description: "Number of reviews the business has received"
+
+      - name: is_open
+        description: "Whether the business is open (1 = open, 0 = closed)"
+
+      - name: categories
+        description: "Comma-separated list of business categories"
+
+      - name: attributes_business_accepts_credit_cards
+        description: "Indicates whether the business accepts credit cards"
+
+      - name: attributes_restaurants_price_range2
+        description: "Relative price range for the business (e.g., 1-4)"
+
+      - name: attributes_business_parking
+        description: "Parking availability"
+
+      - name: attributes_wifi
+        description: "WiFi availability (e.g., 'free', 'no')"
+
+      - name: attributes_has_tv
+        description: "Indicates whether the business has a TV"
+
+      - name: attributes_outdoor_seating
+        description: "Indicates whether the business has outdoor seating"
+
+
+  - name: stg_user
+    description: "Staging model for Yelp users"
+    columns:
+      - name: user_id
+        description: "Unique ID for each user"
+        tests:
+          - unique
+          - not_null
+
+      - name: name
+        description: "User's display name"
+
+      - name: review_count
+        description: "Total number of reviews written"
+
+      - name: yelping_since
+        description: "When the user joined Yelp"
+
+      - name: useful
+        description: "Useful votes received"
+
+      - name: funny
+        description: "Funny votes received"
+
+      - name: cool
+        description: "Cool votes received"
+
+      - name: elite
+        description: "Years the user was elite"
+
+      - name: friends
+        description: "List of friend user IDs"
+
+      - name: fans
+        description: "Number of fans"
+
+      - name: average_stars
+        description: "User's average star rating"
+
+      - name: compliment_hot
+        description: "Compliment count - hot"
+
+      - name: compliment_more
+        description: "Compliment count - more"
+
+      - name: compliment_profile
+        description: "Compliment count - profile"
+
+      - name: compliment_cute
+        description: "Compliment count - cute"
+
+      - name: compliment_list
+        description: "Compliment count - list"
+
+      - name: compliment_note
+        description: "Compliment count - note"
+
+      - name: compliment_plain
+        description: "Compliment count - plain"
+
+      - name: compliment_cool
+        description: "Compliment count - cool"
+
+      - name: compliment_funny
+        description: "Compliment count - funny"
+
+      - name: compliment_writer
+        description: "Compliment count - writer"
+
+      - name: compliment_photos
+        description: "Compliment count - photos"
+
+  - name: stg_review
+    description: "Staging model for Yelp reviews"
+    columns:
+      - name: review_id
+        description: "Unique identifier for the review"
+        tests:
+          - unique
+          - not_null
+
+      - name: user_id
+        description: "ID of the user who wrote the review"
+
+      - name: business_id
+        description: "ID of the business being reviewed"
+
+      - name: stars
+        description: "Star rating given in the review"
+
+      - name: useful
+        description: "Count of useful votes"
+
+      - name: funny
+        description: "Count of funny votes"
+
+      - name: cool
+        description: "Count of cool votes"
+
+      - name: text
+        description: "Text content of the review"
+
+      - name: date
+        description: "Date the review was written"
+
+  - name: stg_tip
+    description: "Staging model for user tips on businesses"
+    columns:
+      - name: user_id
+        description: "ID of the user who gave the tip"
+        tests:
+          - not_null
+
+      - name: business_id
+        description: "ID of the business the tip is about"
+        tests:
+          - not_null
+
+      - name: text
+        description: "Text of the tip"
+
+      - name: date
+        description: "Date the tip was given"
+
+      - name: compliment_count
+        description: "Number of compliments the tip received"
+
+  - name: stg_checkin
+    description: "Staging model for business check-in timestamps"
+    columns:
+      - name: business_id
+        description: "The ID of the business where the check-in happened"
+        tests:
+          - not_null
+
+      - name: checkin_timestamps
+        description: "Comma-separated list of timestamps when check-ins happened"
