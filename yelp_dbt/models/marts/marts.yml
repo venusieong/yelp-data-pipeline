@@ -1,0 +1,90 @@
+version: 2
+
+models:
+  - name: dim_user
+    description: "Dimension table for Yelp users with profile info and account stats"
+    columns:
+      - name: user_id
+        description: "Unique ID of the user"
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: "Name of the user"
+      - name: review_count
+        description: "Total number of reviews written by the user"
+      - name: average_stars
+        description: "User's average star rating"
+
+  - name: dim_business
+    description: "Dimension table for businesses with location, hours, and attributes"
+    columns:
+      - name: business_id
+        description: "Unique ID of the business"
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: "Name of the business"
+      - name: city
+        description: "City where the business is located"
+      - name: state
+        description: "State of the business location"
+
+  - name: dim_category
+    description: "Dimension table containing unique business categories"
+    columns:
+      - name: category
+        description: "A single business category"
+        tests:
+          - not_null
+          - unique
+
+  - name: fact_review
+    description: "Fact table containing review details from users to businesses"
+    columns:
+      - name: review_id
+        description: "Unique review identifier"
+        tests:
+          - not_null
+          - unique
+      - name: user_id
+        description: "Reviewer user ID"
+        tests:
+          - not_null
+      - name: business_id
+        description: "Business being reviewed"
+        tests:
+          - not_null
+      - name: stars
+        description: "Star rating given in the review"
+      - name: review_date
+        description: "Date when the review was posted"
+
+  - name: fact_tip
+    description: "Fact table capturing tips users have left for businesses"
+    columns:
+      - name: user_id
+        description: "User who wrote the tip"
+        tests:
+          - not_null
+      - name: business_id
+        description: "Business the tip is about"
+        tests:
+          - not_null
+      - name: text
+        description: "The tip content"
+      - name: date
+        description: "When the tip was posted"
+
+  - name: fact_checkin
+    description: "Fact table tracking check-in events for businesses by date"
+    columns:
+      - name: business_id
+        description: "Business where check-ins occurred"
+        tests:
+          - not_null
+      - name: checkin_date
+        description: "Date of check-in"
+        tests:
+          - not_null
