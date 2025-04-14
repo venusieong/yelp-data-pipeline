@@ -2,12 +2,14 @@
     materialized='table',
     partition_by={
         "field": "review_month",
-        "data_type": "DATE"
+        "data_type": "date"
     }
 ) }}
 
 with reviews as (
-    select * from {{ ref('stg_review') }}
+    select * 
+    from {{ ref('stg_review') }}
+    where cast(date as date) >= '2018-01-01'
 ),
 
 fact as (
@@ -20,11 +22,12 @@ fact as (
         funny,
         cool,
         date as review_date,
-        date_trunc(cast(date as date), month) as review_month,
+        DATE_TRUNC(cast(date as date), MONTH) as review_month,
         text
     from reviews
 )
 
 select * from fact
+
 
 
