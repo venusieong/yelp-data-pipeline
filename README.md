@@ -4,6 +4,8 @@
 
 Yelp offers valuable insights into local businesses, but the raw data provided is in JSON format and requires significant processing before it can be used for analytical purposes. This project aims to automate the data pipeline from ingestion to transformation and visualization, enabling effective business insights on customer reviews, business performance, and user behavior.
 
+It will be a batch processing pipeline that can be scheduled and run end to end.
+
 ## Dataset
 
 This project uses the [Yelp Open Dataset](https://business.yelp.com/data/resources/open-dataset/) which provides data on businesses, reviews, and user activity across various regions.
