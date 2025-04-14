@@ -92,9 +92,10 @@ This will extract & clean JSON from the Yelp zip, then upload raw data to GCS, a
 
 ### 5.Run dbt Transformations
 This will generate staging, dimension, and fact tables in BigQuery.
+In dbt Cloud, connect to the repo directory yelp_dbt to access the transformation file, then connect to the service account in GCP for BigQuery access.
 ```bash
-cd yelp_dbt
-dbt run
+dbt run --select staging
+dbt run --select marts
 ```
 
 ### 6.Visualize in Looker Studio
