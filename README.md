@@ -22,6 +22,6 @@ Yelp offers valuable insights into local businesses, but the raw data provided i
 4. **Partitioning:** Fact tables are partitioned by month for optimization.
 5. **Visualization:** Looker Studio dashboards are created on top of fact and dimension tables.
 
-<img src="pipeline_diagram.png" alt="Pipeline Diagram" width="600"/>
+<img src="pipeline_diagram.png" alt="Pipeline Diagram" width="450"/>
 
 ![Data Pipeline Diagram](pipeline_diagram.png)
